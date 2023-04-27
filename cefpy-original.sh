@@ -20,7 +20,7 @@ sudo lvextend --size +28G /dev/mapper/rootvg-rootlv
 #sudo sed -i '65 s/^/#/' /etc/rsyslog.conf
 sudo firewall-cmd --permanent --zone=public --add-port=514/tcp
 sudo firewall-cmd --permanent --zone=public --add-port=514/udp
-sudo firewall-cmd –reload
+sudo firewall-cmd --reload
 wget -O Forwarder_AMA_installer.py https://raw.githubusercontent.com/schoonercg/azuretools/master/Forwarder_AMA_installer.py
 sudo python3 Forwarder_AMA_installer.py
 #sudo sleep 60s
