@@ -428,6 +428,7 @@ def change_omsagent_configuration_port(omsagent_incoming_port, configuration_pat
     print_ok("Omsagent incoming port was changed in configuration - " + configuration_path)
     return True
 
+
 def check_syslog_computer_field_mapping(workspace_id):
     '''
     Checking if the OMS agent maps the Computer field correctly:
@@ -626,6 +627,7 @@ def main():
     omsagent_incoming_port = omsagent_default_incoming_port
     port_argument = False
     oms_agent_install_url = "opinsights.azure.com"
+    """
     if len(sys.argv) < 3:
         print_error("Error: The installation script is expecting 2 arguments:")
         print_error("\t1) workspace id")
@@ -649,11 +651,14 @@ def main():
                 elif "-help" in sys.argv[index]:
                     print(help_text)
                     return
+    """
+    """
     check_multi_homing(workspace_id=workspace_id)
     if download_omsagent() and install_omsagent(workspace_id=workspace_id, primary_key=primary_key, oms_agent_install_url=oms_agent_install_url):
         # if setting oms agent configuration has failed we need to stop the script
         if not set_omsagent_configuration(workspace_id=workspace_id, omsagent_incoming_port=omsagent_incoming_port):
             return
+    """
     if is_rsyslog():
         print("Located rsyslog daemon running on the machine")
         create_daemon_forwarding_configuration(omsagent_incoming_port=omsagent_incoming_port,
@@ -661,6 +666,7 @@ def main():
                                                daemon_name=rsyslog_daemon_name)
         set_rsyslog_configuration()
         restart_rsyslog()
+    """
     elif is_syslog_ng():
         print("Located syslog-ng daemon running on the machine")
         create_daemon_forwarding_configuration(omsagent_incoming_port=omsagent_incoming_port,
@@ -668,10 +674,11 @@ def main():
                                                daemon_name=syslog_ng_daemon_name)
         set_syslog_ng_configuration()
         restart_syslog_ng()
+    """
     restart_omsagent(workspace_id=workspace_id)
-    check_syslog_computer_field_mapping(workspace_id=workspace_id)
-    check_portal_auto_sync()
-    print_full_disk_warning()
+    #check_syslog_computer_field_mapping(workspace_id=workspace_id)
+    #check_portal_auto_sync()
+    #print_full_disk_warning()
     print_ok("Installation completed")
 
 
