@@ -14,10 +14,11 @@ sudo lvextend --size +28G /dev/mapper/rootvg-rootlv
 ##Changing the source of the TimeGenerated field
 #wget -O TimeGeneratedG.py #https://raw.githubusercontent.com/schoonercg/azuretools/master/Time_GeneratedG.py
 #sudo python3 TimeGeneratedG.py $1
-#sudo sed -i '46 s/^/#/' /etc/rsyslog.conf
-#sudo sed -i '49 s/^/#/' /etc/rsyslog.conf
-#sudo sed -i '52 s/^/#/' /etc/rsyslog.conf
-#sudo sed -i '65 s/^/#/' /etc/rsyslog.conf
+sudo sed -i '46 s/^/#/' /etc/rsyslog.conf
+sudo sed -i '49 s/^/#/' /etc/rsyslog.conf
+sudo sed -i '52 s/^/#/' /etc/rsyslog.conf
+sudo sed -i '65 s/^/#/' /etc/rsyslog.conf
+sudo systemctl restart rsyslog
 sudo firewall-cmd --permanent --zone=public --add-port=514/tcp
 sudo firewall-cmd --permanent --zone=public --add-port=514/udp
 sudo firewall-cmd --reload
